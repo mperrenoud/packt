@@ -6,9 +6,16 @@
     ViewData["Title"] = "Home Page";
 }
 
-<ul>
+@{await Html.RenderPartialAsync("_Create", new ToDoViewModel());}
+
+<h4>Todos</h4>
+<hr />
+<table class="table table-hover table-striped">
     @foreach (var todo in Model)
     {
-        <li>@todo.Description @Html.CheckBoxFor(o => todo.Completed)</li>
+        <tr>
+            <td>@todo.Description</td>
+            <td>@Html.CheckBoxFor(o => todo.Completed)</td>
+        </tr>
     }
-</ul>
+</table>

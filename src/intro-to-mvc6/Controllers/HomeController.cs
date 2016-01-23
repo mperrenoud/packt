@@ -18,8 +18,21 @@ namespace intro_to_mvc6.Controllers
 
         public IActionResult Index()
         {
-            var todos = _repository.GetAllToDos();
-            return View(AutoMapper.Mapper.Map(todos, new List<ViewModels.ToDoViewModel>()));
+            return View(GetToDos());
+        }
+
+        [HttpPost]
+        public IActionResult Create(ViewModels.ToDoViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!_repository.AddToDo(AutoMapper.Mapper.Map(viewModel, new ToDo())))
+                {
+                    ModelState.AddModelError(string.Empty, "There was an error saving the todo to the database.");
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult About()
@@ -39,6 +52,12 @@ namespace intro_to_mvc6.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        private List<ViewModels.ToDoViewModel> GetToDos()
+        {
+            var todos = _repository.GetAllToDos();
+            return AutoMapper.Mapper.Map(todos, new List<ViewModels.ToDoViewModel>());
         }
     }
 }

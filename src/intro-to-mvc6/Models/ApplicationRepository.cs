@@ -18,10 +18,18 @@ namespace intro_to_mvc6.Models
         {
             return _context.ToDos.ToList();
         }
+
+        public bool AddToDo(ToDo model)
+        {
+            _context.ToDos.Add(model);
+            return _context.SaveChanges() == 1;
+        }
     }
 
     public interface IApplicationRepository
     {
         List<ToDo> GetAllToDos();
+
+        bool AddToDo(ToDo model);
     }
 }
