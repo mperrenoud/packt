@@ -19,7 +19,7 @@ namespace intro_to_mvc6.Controllers
         public IActionResult Index()
         {
             var todos = _repository.GetAllToDos();
-            return View(todos);
+            return View(AutoMapper.Mapper.Map(todos, new List<ViewModels.ToDoViewModel>()));
         }
 
         public IActionResult About()

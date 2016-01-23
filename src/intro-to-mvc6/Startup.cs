@@ -99,6 +99,13 @@ namespace intro_to_mvc6
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            ConfigureAutoMapper();
+        }
+
+        private static void ConfigureAutoMapper()
+        {
+            AutoMapper.Mapper.CreateMap<ToDo, ViewModels.ToDoViewModel>();
         }
 
         // Entry point for the application.
