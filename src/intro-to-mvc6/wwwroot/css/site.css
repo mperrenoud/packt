@@ -31,6 +31,10 @@ div.validation-summary-errors > ul {
     list-style-type: none;
 }
 
+.form-inline{
+    padding: 0.5rem;
+}
+
 @media (min-width: 768px) {
     .carousel-caption {
         z-index: 10 !important;

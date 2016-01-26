@@ -1,11 +1,22 @@
 @model intro_to_mvc6.ViewModels.ToDoViewModel
 
 <form asp-action="Update">
-    <div class="form-inline">
+    @{ 
+        var formBg = this.Model.Completed ? "bg-success" : "";
+    }
+    <div class="form-inline @formBg">
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
             <label asp-for="Description"></label>
-            <input asp-for="Description" class="form-control small" />
+            @if (this.Model.Completed)
+            {
+                <input type="hidden" id="Description" name="Description" value="@this.Model.Description" />
+                <input asp-for="Description" class="form-control" disabled />
+            }
+            else
+            {
+                <input asp-for="Description" class="form-control" />
+            }
         </div>
         <div class="form-group">
             <input asp-for="Completed" />
