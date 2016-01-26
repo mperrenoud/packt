@@ -10,7 +10,7 @@
             <label asp-for="Description"></label>
             @if (this.Model.Completed)
             {
-                <input type="hidden" id="Description" name="Description" value="@this.Model.Description" />
+                <input type="hidden" asp-for="Description" />
                 <input asp-for="Description" class="form-control" disabled />
             }
             else
