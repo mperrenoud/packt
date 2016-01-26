@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using intro_to_mvc6.Models;
+using intro_to_mvc6.ActionFilters;
 
 namespace intro_to_mvc6.Controllers
 {
@@ -16,17 +17,32 @@ namespace intro_to_mvc6.Controllers
             _repository = repository;
         }
 
+        [ImportModelStateFromTempData]
         public IActionResult Index()
         {
             return View(GetToDos());
         }
 
-        [HttpPost]
+        [HttpPost, ExportModelStateToTempData]
         public IActionResult Create(ViewModels.ToDoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 if (!_repository.AddToDo(AutoMapper.Mapper.Map(viewModel, new ToDo())))
+                {
+                    ModelState.AddModelError(string.Empty, "There was an error saving the todo to the database.");
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ExportModelStateToTempData]
+        public IActionResult Update(ViewModels.ToDoViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!_repository.UpdateToDo(AutoMapper.Mapper.Map(viewModel,new ToDo())))
                 {
                     ModelState.AddModelError(string.Empty, "There was an error saving the todo to the database.");
                 }

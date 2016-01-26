@@ -6,7 +6,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-@{await Html.RenderPartialAsync("_Create", new ToDoViewModel());}
+@if (ViewData.ModelState.ErrorCount > 0)
+{
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        @Html.ValidationSummary()
+    </div>
+}
+
+@{ await Html.RenderPartialAsync("_Create", new ToDoViewModel()); }
 
 <h4>Todos</h4>
 <hr />
@@ -14,8 +22,9 @@
     @foreach (var todo in Model)
     {
         <tr>
-            <td>@todo.Description</td>
-            <td>@Html.CheckBoxFor(o => todo.Completed)</td>
+            @{ await Html.RenderPartialAsync("_Update", todo); }
+            @*<td>@todo.Description</td>
+            <td>@Html.CheckBoxFor(o => todo.Completed)</td>*@
         </tr>
     }
 </table>

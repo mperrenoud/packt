@@ -49,6 +49,12 @@ namespace intro_to_mvc6
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddCaching();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.CookieName = ".introToMvc6";
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -93,6 +99,8 @@ namespace intro_to_mvc6
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
+            app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -107,6 +115,7 @@ namespace intro_to_mvc6
         {
             AutoMapper.Mapper.CreateMap<ToDo, ViewModels.ToDoViewModel>();
             AutoMapper.Mapper.CreateMap<ViewModels.ToDoViewModel, ToDo>();
+            AutoMapper.Mapper.CreateMap<ToDo, ToDo>();
         }
 
         // Entry point for the application.
