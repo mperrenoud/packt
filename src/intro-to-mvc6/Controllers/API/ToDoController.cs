@@ -1,5 +1,6 @@
 ﻿using intro_to_mvc6.Models;
 using intro_to_mvc6.ViewModels;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace intro_to_mvc6.Controllers.API
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]"), Authorize]
     public class ToDoController : Controller
     {
         private IApplicationRepository _repository;
