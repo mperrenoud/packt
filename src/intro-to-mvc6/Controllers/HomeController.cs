@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using intro_to_mvc6.Models;
 using intro_to_mvc6.ActionFilters;
+using Microsoft.AspNet.Authorization;
 
 namespace intro_to_mvc6.Controllers
 {
@@ -17,7 +18,7 @@ namespace intro_to_mvc6.Controllers
             _repository = repository;
         }
 
-        [ImportModelStateFromTempData]
+        [ImportModelStateFromTempData, Authorize]
         public IActionResult Index()
         {
             return View(GetToDos());
