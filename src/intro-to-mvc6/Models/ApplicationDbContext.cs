@@ -12,7 +12,7 @@ namespace intro_to_mvc6.Models
     {
         public ApplicationDbContext()
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         public DbSet<ToDo> ToDos { get; set; }
@@ -24,7 +24,5 @@ namespace intro_to_mvc6.Models
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-
-        public DbSet<ToDoViewModel> ToDoViewModel { get; set; }
     }
 }

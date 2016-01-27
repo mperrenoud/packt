@@ -23,5 +23,9 @@ namespace intro_to_mvc6.ViewModels.Account
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string City { get; set; }
+
+        public string State { get; set; }
     }
 }

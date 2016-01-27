@@ -8,9 +8,10 @@ using intro_to_mvc6.Models;
 namespace intro_to_mvc6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160127111720_ToDo_NewProfileFields")]
+    partial class ToDo_NewProfileFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
